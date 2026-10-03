@@ -1,0 +1,73 @@
+﻿<Window x:Class="BeautySalon.Views.AppointmentWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Запись клиента на услугу"
+        Height="420" Width="480"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+            <Image Source="/Resoursces/beauty_logo.png"
+                   Width="32" Height="32" Margin="0,0,8,0"/>
+            <TextBlock Text="Запись на услугу" FontSize="18" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource SecondaryPanel}" Margin="0,0,0,12">
+            <StackPanel>
+                <TextBlock x:Name="lblService" FontWeight="Bold"/>
+                <TextBlock x:Name="lblDuration" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Клиент"/>
+            <ComboBox x:Name="cmbClient" Margin="0,2,0,12">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding FullNameFromQuery}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Margin="0,0,6,0">
+                <TextBlock Text="Дата"/>
+                <DatePicker x:Name="dpDate" Margin="0,2,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="6,0,0,0">
+                <TextBlock Text="Время начала (чч:мм)"/>
+                <TextBox x:Name="txtTime" Margin="0,2,0,0" Padding="6"
+                         TextChanged="TxtTime_TextChanged"
+                         PreviewTextInput="TxtTime_PreviewTextInput"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock x:Name="lblEndTime" Grid.Row="4"
+                   Margin="0,12,0,0" FontWeight="Bold"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Отмена" Width="120" Margin="0,0,8,0" IsCancel="True"/>
+            <Button Content="Записать" Width="120"
+                    Style="{StaticResource AccentButton}"
+                    IsDefault="True" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
